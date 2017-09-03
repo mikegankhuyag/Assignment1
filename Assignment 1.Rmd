@@ -1,0 +1,78 @@
+---
+title: "Assignment 1"
+author: "Munkhnaran Gankhuyag"
+date: "September 2, 2017"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(data.table)
+Mushrooms <- fread('https://archive.ics.uci.edu/ml/machine-learning-databases/mushroom/agaricus-lepiota.data')
+
+data.frame(Mushrooms)
+
+Mushroom_Sample <-Mushrooms[sample(nrow(Mushrooms),20),]
+
+```
+
+```{r}
+str(Mushroom_Sample)
+colnames(Mushroom_Sample) <- c("class", "cap-shape", "cap-surface", "cap_color", "bruises?","odor", "gill-attachment","gill-spacing","gill-size","gill_color","stalk-shape","stalk-root","stalk-surface-above-ring","stalk-surface-below-ring","stalk_color_above_ring","stalk_color_below_ring","veil-type","veil_color","ring-number","ring-type","spore_print_color","population","habitat")
+
+```
+
+
+```{r}
+
+Mushrooms_class<- c(e ="edible", p="poisonous")
+Mushrooms_class[Mushroom_Sample$class]
+
+Mushroom_Sample$class <-Mushrooms_class[Mushroom_Sample$class]
+
+```
+
+```{r}
+Mushrooms_cap_shape<- c(b ="bell", c="conical", x="convex",f="flat",k="knobbed",s="sunken")
+Mushrooms_cap_shape[Mushroom_Sample$`cap-shape`]
+
+Mushroom_Sample$`cap-shape` <-Mushrooms_cap_shape[Mushroom_Sample$`cap-shape`]
+
+```
+
+
+```{r}
+Mushrooms_Surface<-c(f="fibrous", g="grooves",y="scaly", s="smooth")
+Mushrooms_Surface[Mushroom_Sample$`cap-surface`]
+
+Mushroom_Sample$`cap-surface` <-Mushrooms_Surface[Mushroom_Sample$`cap-surface`]
+```
+
+```{r}
+
+Mushrooms_cap_colors<-  c(n="brown", b="buff", c="cinnamon", g="gray", r="green", p="pink", u="purple", e="red", w="white", y="yellow")
+
+Mushrooms_cap_colors[Mushroom_Sample$cap_color]
+
+Mushroom_Sample$cap_color<-Mushrooms_cap_colors[Mushroom_Sample$cap_color]
+```
+
+```{r}
+Mushrooms_Bruises <- c(t="Yes",f="No")
+
+Mushrooms_Bruises[Mushroom_Sample$`bruises?`]
+Mushroom_Sample$`bruises?`<-  Mushrooms_Bruises[Mushroom_Sample$`bruises?`]
+
+```
+
+```{r}
+Mushroom_Sample[1:20,1:5]
+```
+
+
